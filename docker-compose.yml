@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  web:
+    build: ./
+    command: . ./env/Scripts/activate $$ python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - aviator_media:/code/media
+      - aviator_static:/code/static
+    ports:
+      - '8011:8000'
+    env_file: .env
+
+volumes:
+  aviator_media:
+  aviator_static:
