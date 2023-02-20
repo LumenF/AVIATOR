@@ -22,7 +22,7 @@ class CreateUserSchema(Schema):
     supports_inline_queries: bool
     is_bot: bool
 
-    channel: int
+    bot: str
 
 
 class ResponseCreateUserSchema(CreateUserSchema):

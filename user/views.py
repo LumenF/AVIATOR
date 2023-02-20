@@ -18,13 +18,19 @@ async def create_telegram_user(
 ) -> JsonResponse:
     """Создать ТГ-Пользователя"""
     user = await create_user(schemas)
-    if user:
+    if user is True:
         return JsonResponse(
             data={
                 'status': True,
                 'msg': 'User created',
             },
             status=201)
+    elif user == 'ERROR':
+        return JsonResponse(
+            data={
+                'status': False,
+                'msg': 'SERVER ERROR',
+            }, status=500)
     elif not user:
         return JsonResponse(
             data={

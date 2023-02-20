@@ -14,7 +14,7 @@ class UserAdmin(AbstractAdmin):
         'username',
         'first_name',
         'last_name',
-        'channel',
+        'bot',
         'is_staff',
         'is_blocked_bot',
         'is_ban_user',
@@ -32,6 +32,7 @@ class UserAdmin(AbstractAdmin):
     )
     list_display = (
         '__str__',
+        'bot',
         'tel',
         'is_blocked_bot',
         'is_ban_user',
@@ -52,7 +53,7 @@ class UserAdmin(AbstractAdmin):
         'is_ban_user',
     )
     autocomplete_fields = (
-        'channel',
+        'bot',
     )
 
     @admin.action(description='Забанить пользователя')

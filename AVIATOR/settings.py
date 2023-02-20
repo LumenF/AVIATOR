@@ -91,7 +91,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEVELOPMENT = ast.literal_eval(os.getenv('DEVELOPMENT'))
 DEBUG = ast.literal_eval(os.getenv('DEBUG'))
-
+MEDIA_PATH = 'C:\\Users\\lindel\\Desktop\\AVIATIOR\\aviator\\'
 if DEBUG:
     DATABASES = {
         'default': {
@@ -164,7 +164,7 @@ CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
-
+CELERY_ALWAYS_EAGER = False
 s_redis_user = redis.Redis(host=REDIS_HOST,
                            port=int(REDIS_PORT),
                            db=int(os.getenv('REDIS_TELEGRAM_USER')),

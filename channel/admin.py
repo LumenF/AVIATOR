@@ -62,12 +62,14 @@ class BotAdmin(ExtraButtonsMixin, AbstractAdmin):
         'name',
         'count_members',
         'count_all_time',
+        'channel',
         'date_last_modified',
         'date_created',
     )
     search_fields = (
         'name',
         'id_bot',
+        'channel__name'
     )
     exclude = (
         'count_members',

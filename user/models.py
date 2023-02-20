@@ -94,9 +94,9 @@ class UserModel(BaseUser):
         max_length=255,
         **nb
     )
-    channel = models.ForeignKey(
-        verbose_name='Канал',
-        to='channel.ChannelModel',
+    bot = models.ForeignKey(
+        verbose_name='Бот',
+        to='channel.BotModel',
         on_delete=models.CASCADE,
     )
 

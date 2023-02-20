@@ -76,10 +76,19 @@ class MailingModel(AbstractModel):
         choices=CHOICES_STATUS,
         default='Не отправлено',
     )
-    channel = models.ForeignKey(
-        verbose_name='Канал для рассылки',
-        to='channel.ChannelModel',
+    bot = models.ForeignKey(
+        verbose_name='Бот для рассылки',
+        to='channel.BotModel',
         on_delete=models.CASCADE,
+    )
+
+    time_start_sleep = models.TimeField(
+        verbose_name='Отключить уведомления с',
+        **nb
+    )
+    time_finish_sleep = models.TimeField(
+        verbose_name='Отключить уведомления до',
+        **nb
     )
 
     def __str__(self):

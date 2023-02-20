@@ -42,6 +42,11 @@ class BotModel(AbstractModel):
         verbose_name='Токен бота',
         max_length=255,
     )
+    text = models.TextField(
+        verbose_name='Текст приветствия',
+        max_length=1024,
+        help_text='Макс. 1024 символа'
+    )
     count_members = models.BigIntegerField(
         verbose_name='Участники',
         default=0,
@@ -49,6 +54,11 @@ class BotModel(AbstractModel):
     count_all_time = models.BigIntegerField(
         verbose_name='За все время',
         default=0,
+    )
+    channel = models.ForeignKey(
+        verbose_name='Канал',
+        to='channel.ChannelModel',
+        on_delete=models.CASCADE,
     )
 
     def __str__(self):

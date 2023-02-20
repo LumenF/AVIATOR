@@ -6,7 +6,7 @@ from django.http import HttpRequest
 
 from abstractions.admin import AbstractAdmin, AdminImageWidget
 from mailing.models import MailingModel
-from mailing.service import init_mailing
+from mailing.tasks import sender
 
 
 @admin.register(MailingModel)
@@ -39,7 +39,7 @@ class MailingAdmin(AbstractAdmin):
     }
 
     autocomplete_fields = (
-        'channel',
+        'bot',
     )
 
     actions = (
@@ -60,11 +60,8 @@ class MailingAdmin(AbstractAdmin):
                 message='Вы можете отправить только 1 сообщение',
             )
 
-        result = init_mailing(
-            self,
-            request,
-            queryset
-        )
+        result = sender.delay(queryset[0].id)
+        print('result', result)
 
     @admin.action(description='❌ Прервать')
     def abort_mailing(

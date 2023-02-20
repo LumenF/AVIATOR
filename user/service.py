@@ -5,7 +5,7 @@ from typing import Any
 from asgiref.sync import sync_to_async
 
 from AVIATOR.settings import s_redis_user
-from channel.models import ChannelModel
+from channel.models import BotModel
 from user.models import UserModel
 
 
@@ -14,7 +14,7 @@ def get_telegram_user(schemas) -> [UserModel]:
     try:
         user = UserModel.objects.get(
             telegram_id=schemas.telegram_id,
-            channel=ChannelModel.objects.get(id=schemas.channel),
+            bot=BotModel.objects.get(id_bot=schemas.bot),
         )
         return True
     except:
@@ -40,11 +40,12 @@ def create_telegram_user(data) -> [UserModel]:
             is_bot=data.is_bot,
             date_created=datetime.datetime.utcnow(),
             date_last_modified=datetime.datetime.utcnow(),
-            channel=ChannelModel.objects.get(id=data.channel),
+            bot=BotModel.objects.get(id_bot=data.bot),
         )
         return True
     except:
-        return False
+        user = 'ERROR'
+        return user
 
 
 async def get_user(telegram_id: str) -> [UserModel]:
@@ -96,7 +97,7 @@ async def create_user(data):
     user = await sync_to_async(get_telegram_user, thread_sensitive=True)(data)
     if not user:
         user = await sync_to_async(create_telegram_user, thread_sensitive=True)(data)
-        return True
+        return user
 
     return False
 
